@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c68igqu6e4wp6"]
 
-[ext_resource type="Script" path="res://scenes/UI/LevelIndicator.gd" id="1_ogqmj"]
+[ext_resource type="Script" uid="uid://ce330n2c3vb86" path="res://scenes/UI/LevelIndicator.gd" id="1_ogqmj"]
 
 [sub_resource type="Gradient" id="Gradient_0xtuv"]
 offsets = PackedFloat32Array(0, 0.262626)
@@ -38,7 +38,7 @@ script = ExtResource("1_ogqmj")
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 51.0
+offset_bottom = 52.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_u460k")
 
@@ -67,8 +67,8 @@ theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 32
-text = "Level 0
-"
+text = "Level 0"
+vertical_alignment = 1
 
 [connection signal="pressed" from="CanvasLayer/PanelContainer/HBoxContainer/Main" to="." method="_on_main_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/HBoxContainer/Restart" to="." method="_on_restart_pressed"]

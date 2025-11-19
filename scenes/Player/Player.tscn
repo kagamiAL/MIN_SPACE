@@ -1,13 +1,13 @@
 [gd_scene load_steps=23 format=3 uid="uid://cv1b38h0riay4"]
 
-[ext_resource type="Script" path="res://scenes/Player/Player.gd" id="1_3ef65"]
-[ext_resource type="Shader" path="res://scenes/Player/LensDistortion.gdshader" id="2_qwpdh"]
-[ext_resource type="Script" path="res://scenes/Player/Camera2D.gd" id="3_q7ypj"]
+[ext_resource type="Script" uid="uid://boamen6reb7gk" path="res://scenes/Player/Player.gd" id="1_3ef65"]
+[ext_resource type="Shader" uid="uid://b1jv610w4ryxe" path="res://scenes/Player/LensDistortion.gdshader" id="2_qwpdh"]
+[ext_resource type="Script" uid="uid://d1ohmfcuu4kti" path="res://scenes/Player/Camera2D.gd" id="3_q7ypj"]
 [ext_resource type="AudioStream" uid="uid://bemh1dfxd1b7l" path="res://res/audio/jump1.ogg" id="5_va2dx"]
 [ext_resource type="AudioStream" uid="uid://ch8k26eu6c4h1" path="res://res/audio/contact1.ogg" id="6_rpob6"]
 [ext_resource type="AudioStream" uid="uid://c5dxdavfddbrp" path="res://res/audio/death1.ogg" id="7_khthc"]
 [ext_resource type="AudioStream" uid="uid://7opin6amejv4" path="res://res/audio/roll_loop.ogg" id="8_bn5x6"]
-[ext_resource type="Script" path="res://scenes/Player/Sprite.gd" id="18_wu17r"]
+[ext_resource type="Script" uid="uid://dw4jnhytptekq" path="res://scenes/Player/Sprite.gd" id="18_wu17r"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pk2sw"]
 friction = 0.6
@@ -134,10 +134,19 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dy76i"]
 _data = {
-"RESET": SubResource("Animation_ay27k"),
-"die": SubResource("Animation_wfnhh"),
-"jump": SubResource("Animation_gp65j")
+&"RESET": SubResource("Animation_ay27k"),
+&"die": SubResource("Animation_wfnhh"),
+&"jump": SubResource("Animation_gp65j")
 }
+
+[sub_resource type="Gradient" id="Gradient_3rast"]
+colors = PackedColorArray(0.803922, 0.0352941, 0.160784, 1, 0.840444, 0, 0.104624, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_aq7ht"]
+gradient = SubResource("Gradient_3rast")
+width = 5
+height = 5
+fill_from = Vector2(1, 1)
 
 [sub_resource type="Curve" id="Curve_rmnny"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -161,19 +170,10 @@ collision_mode = 1
 collision_friction = 0.0
 collision_bounce = 0.0
 
-[sub_resource type="Gradient" id="Gradient_3rast"]
-colors = PackedColorArray(0.803922, 0.0352941, 0.160784, 1, 0.840444, 0, 0.104624, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_aq7ht"]
-gradient = SubResource("Gradient_3rast")
-width = 5
-height = 5
-fill_from = Vector2(1, 1)
-
 [node name="Player" type="RigidBody2D" groups=["player"]]
 physics_material_override = SubResource("PhysicsMaterial_pk2sw")
-max_contacts_reported = 3
 contact_monitor = true
+max_contacts_reported = 3
 script = ExtResource("1_3ef65")
 SPEED = 1562
 trampoline_bounce_amt = 1000
@@ -239,15 +239,15 @@ color = Color(0.839216, 0.270588, 0.270588, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_dy76i")
+&"": SubResource("AnimationLibrary_dy76i")
 }
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 256
-process_material = SubResource("ParticleProcessMaterial_gp1r7")
 texture = SubResource("GradientTexture2D_aq7ht")
 one_shot = true
+process_material = SubResource("ParticleProcessMaterial_gp1r7")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 top_level = true

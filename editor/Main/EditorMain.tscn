@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dqfy5urq65gy0"]
 
-[ext_resource type="Script" path="res://editor/Main/Main.gd" id="1_u1phi"]
-[ext_resource type="Shader" path="res://scenes/UI/Blur.gdshader" id="2_q1mmh"]
+[ext_resource type="Script" uid="uid://c0bspphj1a710" path="res://editor/Main/Main.gd" id="1_u1phi"]
+[ext_resource type="Shader" uid="uid://brtv6hc02ai5h" path="res://scenes/UI/Blur.gdshader" id="2_q1mmh"]
 [ext_resource type="PackedScene" uid="uid://bg0nxe4bxdesn" path="res://editor/Editor.tscn" id="3_xlwb1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dtduo"]
@@ -119,6 +119,7 @@ all_tabs_in_front = true
 [node name="Maps" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Maps"]
 layout_mode = 2
@@ -152,6 +153,7 @@ hide_root = true
 unique_name_in_owner = true
 layout_mode = 2
 columns = 2
+metadata/_tab_index = 1
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Properties"]
 layout_mode = 2
@@ -190,7 +192,7 @@ use_native_dialog = true
 
 [node name="LoadMusicDialog" type="FileDialog" parent="."]
 title = "Open a File"
-size = Vector2i(284, 126)
+size = Vector2i(368, 164)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
@@ -199,7 +201,7 @@ use_native_dialog = true
 
 [node name="SaveDialog" type="FileDialog" parent="."]
 title = "Save circuit as..."
-size = Vector2i(448, 137)
+size = Vector2i(448, 164)
 access = 2
 filters = PackedStringArray(".json")
 use_native_dialog = true
