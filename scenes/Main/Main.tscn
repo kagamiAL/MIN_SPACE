@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://bhju5n4ymgoto"]
 
-[ext_resource type="Script" path="res://scenes/Main/Menu.gd" id="1_r3bay"]
+[ext_resource type="Script" uid="uid://bc5o26f6hk2yq" path="res://scenes/Main/Menu.gd" id="1_r3bay"]
 [ext_resource type="AudioStream" uid="uid://bxr6qqqx2lq5d" path="res://res/audio/MainMenuTheme.ogg" id="3_aul47"]
 [ext_resource type="PackedScene" uid="uid://inas5xn4h6tb" path="res://scenes/UI/LeaderBoard.tscn" id="3_mcylv"]
 [ext_resource type="TileSet" uid="uid://83e6r7d4e13" path="res://scenes/Tiles/TileMap.tres" id="3_udspc"]
@@ -50,8 +50,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o04a8"]
 _data = {
-"RESET": SubResource("Animation_fbmog"),
-"camera": SubResource("Animation_17eu4")
+&"RESET": SubResource("Animation_fbmog"),
+&"camera": SubResource("Animation_17eu4")
 }
 
 [sub_resource type="Animation" id="Animation_l72wp"]
@@ -135,8 +135,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f71vl"]
 _data = {
-"RESET": SubResource("Animation_l72wp"),
-"crossfade": SubResource("Animation_hgjb7")
+&"RESET": SubResource("Animation_l72wp"),
+&"crossfade": SubResource("Animation_hgjb7")
 }
 
 [node name="Menu" type="Control"]
@@ -259,14 +259,14 @@ limit_smoothed = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_o04a8")
+&"": SubResource("AnimationLibrary_o04a8")
 }
 autoplay = "camera"
 speed_scale = 0.05
 
 [node name="SoundAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_f71vl")
+&"": SubResource("AnimationLibrary_f71vl")
 }
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Play" to="." method="_on_play_pressed"]
