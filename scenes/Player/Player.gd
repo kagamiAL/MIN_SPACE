@@ -125,7 +125,7 @@ func kill():
 	set_deferred("freeze", true)
 	linear_velocity = Vector2()
 	# Hide sprite
-	$Sprite.hide()
+	#$Sprite.hide()
 	$%Time.hide()
 	# Play death sound
 	$RollingTheyBoulder.stop()
@@ -144,7 +144,6 @@ func reset():
 	# Show sprite
 	$Sprite.show()
 	$%Time.show()
-	$GPUParticles2D.emitting = false
 	$AnimationPlayer.play("RESET")
 
 func is_on_floor():
