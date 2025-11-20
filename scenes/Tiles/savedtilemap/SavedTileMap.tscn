@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b50u22ac7kuap"]
 
-[ext_resource type="Script" path="res://scenes/Tiles/savedtilemap/SavedTileMap.gd" id="1_7ep1f"]
+[ext_resource type="Script" uid="uid://be50d3xnhu28m" path="res://scenes/Tiles/savedtilemap/SavedTileMap.gd" id="1_7ep1f"]
 [ext_resource type="TileSet" uid="uid://83e6r7d4e13" path="res://scenes/Tiles/TileMap.tres" id="1_tjdmx"]
 
 [node name="SavedTileMap" type="TileMap"]
@@ -8,11 +8,8 @@ tile_set = ExtResource("1_tjdmx")
 format = 2
 layer_0/name = "Base"
 layer_1/name = "Trampolines"
-layer_1/tile_data = PackedInt32Array()
 layer_2/name = "Spikes"
-layer_2/tile_data = PackedInt32Array()
 layer_3/name = "Goals"
-layer_3/tile_data = PackedInt32Array()
 script = ExtResource("1_7ep1f")
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
