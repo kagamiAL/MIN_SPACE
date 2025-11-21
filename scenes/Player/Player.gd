@@ -38,7 +38,7 @@ var last_position: Vector2;
 # Stores the time since the last time ContactAudio was playing.
 var contact_audio_request_timestamp = 0
 
-func _process(delta):
+func _process(_delta):
 	$%Time.text = "%.2f" % get_time_elapsed()
 
 func get_time_elapsed():
@@ -178,16 +178,17 @@ func detect_wall_clipping():
 			return
 	last_position = self.global_position
 
-func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+func _on_area_2d_body_shape_entered(body_rid, body, _body_shape_index, _local_shape_index):
 	if body is TileMap:
 		_collisions.append(body_rid)
 
-func _on_area_2d_body_shape_exited(body_rid, body, body_shape_index, local_shape_index):
+func _on_area_2d_body_shape_exited(body_rid, body, _body_shape_index, _local_shape_index):
 	if body is TileMap:
-		_collisions.remove_at(_collisions.find(body_rid))
+		var idx = _collisions.find(body_rid)
+		if idx > -1: _collisions.remove_at(idx)
 
 # Makes a sound when it hits a body
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	if (not contact_audio_request_timestamp\
 	   or (Time.get_ticks_msec() - contact_audio_request_timestamp) > 50)\
 		and not $ContactAudio.playing:

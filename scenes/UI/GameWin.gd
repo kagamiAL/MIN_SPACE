@@ -7,8 +7,8 @@ func set_time(time : float):
 	$%Time.text = str(time)
 	t = time
 
-func set_map_name(name : String):
-	n = name
+func set_map_name(map_name : String):
+	n = map_name
 
 func animate_show():
 	$AnimationPlayer.play("show")
