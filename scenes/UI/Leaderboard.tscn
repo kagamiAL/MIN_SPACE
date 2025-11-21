@@ -8,3 +8,8 @@ script = ExtResource("1_d3sb7")
 
 [node name="Title" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer" index="0"]
 text = "Leaderboard"
+
+[node name="TabContainer" type="TabContainer" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/Content" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3

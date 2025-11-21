@@ -69,6 +69,7 @@ func _on_player_won():
 	$WinSound.play()
 	if next_level():
 		$GameWin.set_time($Player.get_time_elapsed())
+		$GameWin.set_map_name("MIN SPACE")
 		$GameWin.animate_show()
 		$Player.hide()
 	else:

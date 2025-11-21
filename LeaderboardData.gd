@@ -6,7 +6,7 @@ var leader_board := []
 func _save_leaderboard():
 	var leader_board_file = FileAccess.open("user://leaderboard.csv", FileAccess.WRITE)
 	for data in leader_board:
-		leader_board_file.store_line(str(data[0]) + "," + data[1])
+		leader_board_file.store_line(str(data[0]) + "," + data[1] + "," + data[2])
 
 func _load_leaderboard():
 	if not FileAccess.file_exists("user://leaderboard.csv"):
@@ -15,7 +15,7 @@ func _load_leaderboard():
 	while leader_board_file.get_position() < leader_board_file.get_length():
 		var line = leader_board_file.get_line()
 		var values = line.split(",")
-		leader_board.append([float(values[0]), values[1]])
+		leader_board.append([float(values[0]), values[1], values[2]])
 
 func _sort_leaderboard():
 	leader_board.sort_custom(func(a, b): return a[0] < b[0])
@@ -24,8 +24,8 @@ func get_leaderboard():
 	_sort_leaderboard()
 	return leader_board
 
-func append_leaderboard(score: float):
-	leader_board.append([score, Time.get_date_string_from_system() + " (%02d:%02d:%02d)" % [time.hour, time.minute, time.second]])
+func append_leaderboard(map_name: String, score: float, player_name: String):
+	leader_board.append([score, player_name, map_name])
 	_sort_leaderboard()
 	_save_leaderboard()
 
