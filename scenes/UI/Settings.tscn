@@ -1,23 +1,23 @@
 [gd_scene load_steps=3 format=3 uid="uid://ck22cvxmk301"]
 
 [ext_resource type="PackedScene" uid="uid://d0eivog06w651" path="res://scenes/UI/Dialog.tscn" id="1_mn0fb"]
-[ext_resource type="Script" path="res://scenes/UI/Settings.gd" id="2_yq6fm"]
+[ext_resource type="Script" uid="uid://eyyxllbb4dbg" path="res://scenes/UI/Settings.gd" id="2_yq6fm"]
 
 [node name="Settings" instance=ExtResource("1_mn0fb")]
 script = ExtResource("2_yq6fm")
 
-[node name="Title" parent="PanelContainer/VBoxContainer/Header" index="0"]
+[node name="Title" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer" index="0"]
 text = "Settings"
 
-[node name="Music Volume" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/Content" index="0"]
+[node name="Music Volume" type="HBoxContainer" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/Content" index="0"]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/Content/Music Volume" index="0"]
+[node name="Label" type="Label" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/Content/Music Volume" index="0"]
 layout_mode = 2
 text = "Music volume"
 
-[node name="MusicSlider" type="HSlider" parent="PanelContainer/VBoxContainer/ScrollContainer/Content/Music Volume" index="1"]
+[node name="MusicSlider" type="HSlider" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/Content/Music Volume" index="1"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -25,20 +25,18 @@ max_value = 1.0
 step = 0.1
 tick_count = 10
 
-[node name="SFX Volume" type="HBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/Content" index="1"]
+[node name="SFX Volume" type="HBoxContainer" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/Content" index="1"]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/ScrollContainer/Content/SFX Volume" index="0"]
+[node name="Label" type="Label" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/Content/SFX Volume" index="0"]
 layout_mode = 2
 text = "Sound effects"
 
-[node name="SFXSlider" type="HSlider" parent="PanelContainer/VBoxContainer/ScrollContainer/Content/SFX Volume" index="1"]
+[node name="SFXSlider" type="HSlider" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/Content/SFX Volume" index="1"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.1
 tick_count = 10
-
-[connection signal="value_changed" from="PanelContainer/VBoxContainer/ScrollContainer/Content/Music Volume/MusicSlider" to="." method="_on_music_slider_value_changed"]

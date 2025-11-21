@@ -2,46 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://d0eivog06w651" path="res://scenes/UI/Dialog.tscn" id="1_d77uu"]
 [ext_resource type="PackedScene" uid="uid://d0tjurbwslrgx" path="res://scenes/UI/LevelButton.tscn" id="2_e2qm2"]
-[ext_resource type="PackedScene" uid="uid://dwravqmapaab0" path="res://scenes/Maps/Map00.tscn" id="2_pf4dg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5pljj"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
 
 [node name="Levels" instance=ExtResource("1_d77uu")]
 button_scene = ExtResource("2_e2qm2")
 
-[node name="PanelContainer" parent="." index="0"]
-offset_left = -424.0
-offset_right = 424.0
-
-[node name="Reload" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer/Buttons" index="1"]
-layout_mode = 2
-text = "Reload"
-
-[node name="Add" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer/Buttons" index="2"]
-layout_mode = 2
-text = "Add circuit"
-
-[node name="Header" parent="PanelContainer/VBoxContainer" index="1"]
-visible = false
-
-[node name="Levels" type="GridContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/Content" index="0"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/h_separation = 8
-theme_override_constants/v_separation = 8
-columns = 6
-
-[node name="DEFAULT" parent="PanelContainer/VBoxContainer/ScrollContainer/Content/Levels" index="0" instance=ExtResource("2_e2qm2")]
-unique_name_in_owner = true
-layout_mode = 2
-text = "MIN SPACE
-Built-in"
-
-[node name="Map01" parent="PanelContainer/VBoxContainer/ScrollContainer/Content/Levels/DEFAULT/SubViewport" index="1" instance=ExtResource("2_pf4dg")]
-
-[node name="SavedTileMap" parent="PanelContainer/VBoxContainer/ScrollContainer/Content/Levels/DEFAULT/SubViewport" index="2"]
-visible = false
-
-[node name="FileDialog" type="FileDialog" parent="." index="1"]
+[node name="FileDialog" type="FileDialog" parent="." index="0"]
 title = "Open a File"
 ok_button_text = "Open"
 file_mode = 0
@@ -49,9 +20,38 @@ access = 2
 filters = PackedStringArray("*.json")
 use_native_dialog = true
 
-[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/Buttons/Reload" to="." method="_on_reload_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/Buttons/Add" to="." method="_on_add_pressed"]
-[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
+[node name="PanelContainer" parent="." index="2"]
+offset_left = -424.0
+offset_right = 424.0
 
-[editable path="PanelContainer/VBoxContainer/ScrollContainer/Content/Levels/DEFAULT"]
+[node name="Reload" type="Button" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer/Buttons" index="1"]
+layout_mode = 2
+text = "Reload"
+
+[node name="Add" type="Button" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer/Buttons" index="2"]
+layout_mode = 2
+text = "Add circuit"
+
+[node name="Title" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer" index="0"]
+visible = false
+text = "Level Select"
+
+[node name="ScrollContainer" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer" index="1"]
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5pljj")
+
+[node name="Levels" type="GridContainer" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/Content" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 6
+
+[node name="DEFAULT" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/Content/Levels" index="0" instance=ExtResource("2_e2qm2")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "MIN SPACE
+Built-in"
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

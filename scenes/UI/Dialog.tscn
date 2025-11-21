@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0eivog06w651"]
+[gd_scene load_steps=5 format=3 uid="uid://d0eivog06w651"]
 
-[ext_resource type="Script" path="res://scenes/UI/Dialog.gd" id="1_cbhhp"]
+[ext_resource type="Script" uid="uid://bfq7foxo6rr2x" path="res://scenes/UI/Dialog.gd" id="1_cbhhp"]
+[ext_resource type="Shader" uid="uid://brtv6hc02ai5h" path="res://scenes/UI/Blur.gdshader" id="2_weoit"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pqlev"]
+shader = ExtResource("2_weoit")
+shader_parameter/lod = 1.724
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_weoit"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.105882, 0.121569, 0.168627, 0.72549)
 
 [node name="Dialog" type="Control"]
 layout_mode = 3
@@ -11,57 +23,67 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cbhhp")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="Blur" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_pqlev")
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -316.0
-offset_top = -239.5
-offset_right = 316.0
-offset_bottom = 239.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_weoit")
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer"]
+custom_minimum_size = Vector2(500, 500)
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Buttons" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer"]
+[node name="Buttons" type="HBoxContainer" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Back" type="Button" parent="PanelContainer/VBoxContainer/PanelContainer/Buttons"]
+[node name="Back" type="Button" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Back"
 
-[node name="Header" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="Title" type="Label" parent="PanelContainer/VBoxContainer/Header"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "Header"
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/Header"]
-layout_mode = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Content" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer"]
+[node name="Content" type="VBoxContainer" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 15
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/PanelContainer/Buttons/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="PanelContainer/CenterContainer/VBoxContainer/PanelContainer/Buttons/Back" to="." method="_on_back_pressed"]
