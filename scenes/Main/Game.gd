@@ -32,11 +32,16 @@ func load_current_level():
 	if map_node:
 		map_node.queue_free()
 		await map_node.tree_exited
-	$Player.reset()
-	await get_tree().physics_frame
+	# Stop player
+	$Player.stop()
+	# Add map
 	map_node = maps[level_index].instantiate()
 	map_node.z_index = -1
 	add_child(map_node)
+	await get_tree().process_frame
+	# THEN reset player
+	$Player.reset()
+	await get_tree().physics_frame
 
 #Returns true if player won game
 func next_level() -> bool:
@@ -67,8 +72,6 @@ func _on_player_died():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Engine.physics_ticks_per_second = DisplayServer.screen_get_refresh_rate() # Hack to make physics smooth
-	print("Physics engine set to %d FPS" % Engine.physics_ticks_per_second)
 	set_up_maps_from_dir("res://scenes/Maps")
 	load_current_level()
 	$SoundTrack.play()

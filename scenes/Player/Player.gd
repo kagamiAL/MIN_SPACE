@@ -108,6 +108,9 @@ func handle_tile_collision(tilemap_layer):
 			emit_signal("won")
 
 func stop():
+	last_position = Vector2.ZERO
+	linear_velocity = Vector2.ZERO
+	angular_velocity = 0
 	set_process(false)
 	set_physics_process(false)
 	set_deferred("freeze", true)
@@ -134,13 +137,13 @@ func kill():
 	$AnimationPlayer.play("die")
 
 func reset():
-	# Restart velocity + position
-	position = Vector2.ZERO
-	# Reset things
+	# Unfreeze
 	set_process(true)
 	set_physics_process(true)
 	set_deferred("freeze", false)
-	linear_velocity = Vector2()
+	# Reset velocity + position
+	position = Vector2.ZERO
+	linear_velocity = Vector2.ZERO
 	# Show sprite
 	$Sprite.show()
 	$%Time.show()

@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2x1cyqmkoaw"]
+[gd_scene load_steps=10 format=3 uid="uid://bwt4w6av7tf7n"]
 
-[ext_resource type="Script" path="res://scenes/Main/Game.gd" id="1_0vo2w"]
+[ext_resource type="Script" uid="uid://w7w453qe0v0r" path="res://scenes/Main/Game.gd" id="1_0vo2w"]
 [ext_resource type="AudioStream" uid="uid://c8g1lohgwvrea" path="res://res/audio/MinSpaceInGameTheme.ogg" id="2_qwucb"]
 [ext_resource type="AudioStream" uid="uid://bqnqrgaqdpu16" path="res://res/audio/win.ogg" id="3_k0ybw"]
 [ext_resource type="PackedScene" uid="uid://cv1b38h0riay4" path="res://scenes/Player/Player.tscn" id="4_st1hb"]
@@ -40,8 +40,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vghky"]
 _data = {
-"RESET": SubResource("Animation_asqgb"),
-"goal_reached": SubResource("Animation_nmfib")
+&"RESET": SubResource("Animation_asqgb"),
+&"goal_reached": SubResource("Animation_nmfib")
 }
 
 [node name="Game" type="Node2D"]
@@ -70,7 +70,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_vghky")
+&"": SubResource("AnimationLibrary_vghky")
 }
 
 [node name="Player" parent="." instance=ExtResource("4_st1hb")]
