@@ -9,6 +9,14 @@ var map_node
 
 var _circuit_json;
 
+func reset():
+	level_index = 0
+	$LevelIndicator.set_label(map_node.name, level_index + 1, len(maps))
+	load_current_level()
+	$Player.show()
+	$Player.reset_time()
+	$GameWin.hide()
+
 # Loads from a parsed circuit (not map) JSON
 func load_json(input):
 	_circuit_json = input
@@ -66,7 +74,7 @@ func _on_player_won():
 	$WinSound.play()
 	if next_level():
 		$GameWin.set_time($Player.get_time_elapsed())
-		$GameWin.show()
+		$GameWin.animate_show()
 		$Player.hide()
 	else:
 		load_current_level()

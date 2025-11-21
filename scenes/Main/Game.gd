@@ -8,6 +8,14 @@ var player;
 
 @export var level_index: int;
 
+func reset():
+	level_index = 0
+	$LevelIndicator.set_label("Level %d" % level_index, level_index, 7)
+	load_current_level()
+	$Player.show()
+	$Player.reset_time()
+	$GameWin.hide()
+
 func set_up_maps_from_dir(path: String):
 	var regex = RegEx.new()
 	regex.compile("\\d+")
@@ -61,7 +69,7 @@ func _on_player_won():
 	$WinSound.play()
 	if next_level():
 		$GameWin.set_time($Player.get_time_elapsed())
-		$GameWin.show()
+		$GameWin.animate_show()
 		$Player.hide()
 	else:
 		$LevelIndicator.set_label("Level %d" % level_index, level_index, 7)
@@ -80,6 +88,4 @@ func _ready():
 
 
 func _on_level_indicator_restart_pressed() -> void:
-	level_index = 0
-	$LevelIndicator.set_label("Level %d" % level_index, level_index, 7)
-	load_current_level()
+	reset()

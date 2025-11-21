@@ -136,6 +136,9 @@ func kill():
 	# All our food keeps BLOWING UP
 	$AnimationPlayer.play("die")
 
+func reset_time():
+	initial_time = Time.get_ticks_msec()
+
 func reset():
 	# Unfreeze
 	set_process(true)
