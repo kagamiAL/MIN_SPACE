@@ -74,5 +74,11 @@ func _on_player_won():
 func _on_player_died():
 	load_current_level()
 
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	Engine.physics_ticks_per_second = DisplayServer.screen_get_refresh_rate() # Hack to make physics smooth
+	print("Physics engine set to %d FPS" % Engine.physics_ticks_per_second)
+
+
 func _on_level_indicator_restart_pressed():
 	get_node("/root/SceneSwitch").play_circuit(_circuit_json)
