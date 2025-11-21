@@ -1,10 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://c68igqu6e4wp6"]
+[gd_scene load_steps=11 format=3 uid="uid://c68igqu6e4wp6"]
 
 [ext_resource type="Script" uid="uid://ce330n2c3vb86" path="res://scenes/UI/LevelIndicator.gd" id="1_ogqmj"]
+[ext_resource type="Texture2D" uid="uid://uhcjfl62y324" path="res://res/icons/back.svg" id="2_s6l1o"]
+[ext_resource type="Texture2D" uid="uid://cbthjenlptwy6" path="res://res/icons/restart.svg" id="3_aqt1x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aqt1x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g42hh"]
+bg_color = Color(0.38039216, 0.3647059, 0.91764706, 1)
+corner_radius_top_right = 8
 
 [sub_resource type="Gradient" id="Gradient_0xtuv"]
-offsets = PackedFloat32Array(0, 0.262626)
-colors = PackedColorArray(0, 0, 0, 0.501961, 0, 0, 0, 0)
+offsets = PackedFloat32Array(0, 0.262626, 0.79265094, 1)
+colors = PackedColorArray(0, 0, 0, 0.501961, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5019608)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_gqxkh"]
 gradient = SubResource("Gradient_0xtuv")
@@ -35,6 +43,20 @@ script = ExtResource("1_ogqmj")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 8)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxEmpty_aqt1x")
+theme_override_styles/fill = SubResource("StyleBoxFlat_g42hh")
+show_percentage = false
+
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
 anchors_preset = 10
 anchor_right = 1.0
@@ -44,22 +66,27 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_u460k")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer"]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 8
 
 [node name="Main" type="Button" parent="CanvasLayer/PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 shortcut = SubResource("Shortcut_mosoo")
-text = "←"
+icon = ExtResource("2_s6l1o")
+expand_icon = true
 
 [node name="Restart" type="Button" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 shortcut = SubResource("Shortcut_mosoo")
-text = "Restart"
+icon = ExtResource("3_aqt1x")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Level" type="Label" parent="CanvasLayer/PanelContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.380392, 0.364706, 0.917647, 1)
 theme_override_colors/font_shadow_color = Color(0.105882, 0.121569, 0.168627, 1)
 theme_override_colors/font_outline_color = Color(0.105882, 0.121569, 0.168627, 1)
@@ -68,6 +95,7 @@ theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 32
 text = "Level 0"
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [connection signal="pressed" from="CanvasLayer/PanelContainer/HBoxContainer/Main" to="." method="_on_main_pressed"]

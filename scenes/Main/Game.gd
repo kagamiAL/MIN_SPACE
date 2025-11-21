@@ -77,3 +77,9 @@ func _ready():
 	set_up_maps_from_dir("res://scenes/Maps")
 	load_current_level()
 	$SoundTrack.play()
+
+
+func _on_level_indicator_restart_pressed() -> void:
+	level_index = 0
+	$LevelIndicator.set_label("Level %d" % level_index, level_index, 7)
+	load_current_level()

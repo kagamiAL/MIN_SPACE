@@ -269,4 +269,7 @@ libraries = {
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/SettingsButton" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/MapEditor" to="." method="_on_map_editor_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="hidden" from="CanvasLayer/LeaderBoard" to="." method="_on_leader_board_hidden"]
+[connection signal="hidden" from="CanvasLayer/Settings" to="." method="_on_settings_hidden"]
 [connection signal="visibility_changed" from="CanvasLayer/Editor" to="." method="_on_editor_visibility_changed"]
+[connection signal="hidden" from="CanvasLayer/Levels" to="." method="_on_levels_hidden"]

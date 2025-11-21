@@ -82,3 +82,4 @@ visible = false
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="won" from="Player" to="." method="_on_player_won"]
+[connection signal="restart_pressed" from="LevelIndicator" to="." method="_on_level_indicator_restart_pressed"]
