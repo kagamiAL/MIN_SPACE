@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b43w80klpbdo6"]
+[gd_scene load_steps=6 format=3 uid="uid://b43w80klpbdo6"]
 
 [ext_resource type="PackedScene" uid="uid://d0eivog06w651" path="res://scenes/UI/Dialog.tscn" id="1_d77uu"]
 [ext_resource type="PackedScene" uid="uid://d0tjurbwslrgx" path="res://scenes/UI/LevelButton.tscn" id="2_e2qm2"]
 [ext_resource type="Script" uid="uid://bp1dlkw6qb43d" path="res://scenes/UI/levels.gd" id="2_qidnb"]
+[ext_resource type="PackedScene" uid="uid://dwravqmapaab0" path="res://scenes/Maps/Map00.tscn" id="4_wly44"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5pljj"]
 content_margin_left = 5.0
@@ -50,11 +51,19 @@ columns = 6
 
 [node name="DEFAULT" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/Content/Levels" index="0" instance=ExtResource("2_e2qm2")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(474, 128)
 layout_mode = 2
 text = "MIN SPACE
 Built-in"
+
+[node name="SubViewport" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/Content/Levels/DEFAULT" index="0"]
+size = Vector2i(470, 120)
+
+[node name="Map01" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/Content/Levels/DEFAULT/SubViewport" index="2" instance=ExtResource("4_wly44")]
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="pressed" from="PanelContainer/CenterContainer/VBoxContainer/PanelContainer/Buttons/Reload" to="." method="_on_reload_pressed"]
 [connection signal="pressed" from="PanelContainer/CenterContainer/VBoxContainer/PanelContainer/Buttons/Add" to="." method="_on_add_pressed"]
+
+[editable path="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/Content/Levels/DEFAULT"]
