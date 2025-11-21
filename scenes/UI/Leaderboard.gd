@@ -17,5 +17,5 @@ func _update_leaderboard():
 	for data in leader_board_data.get_leaderboard():
 		print(data)
 		var score = score_template.instantiate()
-		score.text = ("- %s: %.2f") % [data[1], data[0]]
+		score.set_score(data[1], data[0])
 		scores.add_child(score)
