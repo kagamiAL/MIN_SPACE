@@ -30,10 +30,10 @@ func _on_map_editor_pressed():
 func _on_editor_visibility_changed():
 	if $%Editor.visible:
 		$MapTheme.play()
-		$SoundAnimationPlayer.play("crossfade")
+		$AnimationPlayers/Sound.play("crossfade")
 	else:
 		$%MapEditor.grab_focus()
-		$SoundAnimationPlayer.play_backwards("crossfade")
+		$AnimationPlayers/Sound.play_backwards("crossfade")
 
 # Oh dear
 

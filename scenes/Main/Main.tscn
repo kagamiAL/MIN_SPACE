@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bhju5n4ymgoto"]
+[gd_scene load_steps=23 format=3 uid="uid://bhju5n4ymgoto"]
 
 [ext_resource type="Script" uid="uid://bc5o26f6hk2yq" path="res://scenes/Main/Menu.gd" id="1_r3bay"]
 [ext_resource type="AudioStream" uid="uid://bxr6qqqx2lq5d" path="res://res/audio/MainMenuTheme.ogg" id="3_aul47"]
@@ -12,6 +12,12 @@
 
 [sub_resource type="SystemFont" id="SystemFont_p7tdo"]
 font_names = PackedStringArray("Century Gothic")
+
+[sub_resource type="Gradient" id="Gradient_r0gd4"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_krkin"]
+gradient = SubResource("Gradient_r0gd4")
 
 [sub_resource type="SystemFont" id="SystemFont_8r0ef"]
 font_names = PackedStringArray("Century Gothic")
@@ -139,6 +145,260 @@ _data = {
 &"crossfade": SubResource("Animation_hgjb7")
 }
 
+[sub_resource type="Animation" id="Animation_r0gd4"]
+resource_name = "show"
+length = 1.9
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../CanvasLayer/VBoxContainer/Control/TextureRect:top_level")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../CanvasLayer/VBoxContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../CanvasLayer/VBoxContainer/Control/TextureRect:anchors_preset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [8, 0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CanvasLayer/VBoxContainer/Control/TextureRect:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.2, 1.3),
+"transitions": PackedFloat32Array(0, 0.21022414, 0, 0),
+"update": 0,
+"values": [263.5, 263.5, 90.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%Play:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.2, 1.5),
+"transitions": PackedFloat32Array(0, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../CanvasLayer/VBoxContainer/Control/TextureRect:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.2, 1.3, 1.5),
+"transitions": PackedFloat32Array(5.4641595, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%Leaderboard:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.3, 1.6),
+"transitions": PackedFloat32Array(0, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%SettingsButton:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1.4, 1.7),
+"transitions": PackedFloat32Array(0, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("%MapEditor:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1.5, 1.8),
+"transitions": PackedFloat32Array(0, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("%Quit:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1.6, 1.9),
+"transitions": PackedFloat32Array(0, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_krkin"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../CanvasLayer/VBoxContainer/Control/TextureRect:top_level")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../CanvasLayer/VBoxContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../CanvasLayer/VBoxContainer/Control/TextureRect:anchors_preset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CanvasLayer/VBoxContainer/Control/TextureRect:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%Play:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../CanvasLayer/VBoxContainer/Control/TextureRect:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%Leaderboard:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%SettingsButton:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("%MapEditor:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("%Quit:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yxg74"]
+_data = {
+&"RESET": SubResource("Animation_krkin"),
+&"show": SubResource("Animation_r0gd4")
+}
+
 [node name="Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -158,29 +418,49 @@ layer_0/tile_data = PackedInt32Array(327680, 1, 0, 327681, 1, 0, 393216, 1, 0, 3
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -144.0
-offset_top = 100.0
-offset_right = 144.0
-offset_bottom = 365.0
+anchor_bottom = 0.5
+offset_left = -245.5
+offset_top = -234.5
+offset_right = 245.5
+offset_bottom = 234.5
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 32
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer"]
+[node name="Control" type="Control" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control"]
+layout_mode = 1
+offset_right = 491.0
+offset_bottom = 121.00037
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource("3_wnrrw")
 
 [node name="Play" type="Button" parent="CanvasLayer/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(256, 32)
+custom_minimum_size = Vector2(280, 48)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = SubResource("SystemFont_p7tdo")
-theme_override_font_sizes/font_size = 24
-text = "Play
-"
+theme_override_font_sizes/font_size = 32
+text = "PLAY GAME"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Play"]
+modulate = Color(1, 1, 1, 0.34901962)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_krkin")
 
 [node name="Leaderboard" type="Button" parent="CanvasLayer/VBoxContainer"]
 unique_name_in_owner = true
@@ -221,13 +501,11 @@ text = "Quit"
 
 [node name="LeaderBoard" parent="CanvasLayer" instance=ExtResource("3_mcylv")]
 unique_name_in_owner = true
-visible = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Settings" parent="CanvasLayer" instance=ExtResource("4_mw6f4")]
 unique_name_in_owner = true
-visible = false
 
 [node name="Editor" parent="CanvasLayer" instance=ExtResource("5_a2ivn")]
 unique_name_in_owner = true
@@ -235,7 +513,6 @@ visible = false
 
 [node name="Levels" parent="CanvasLayer" instance=ExtResource("6_c5yde")]
 unique_name_in_owner = true
-visible = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_aul47")
@@ -252,17 +529,27 @@ bus = &"SoundTrack"
 anchor_mode = 0
 limit_smoothed = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayers" type="Node" parent="."]
+
+[node name="Camera" type="AnimationPlayer" parent="AnimationPlayers"]
+root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_o04a8")
 }
 autoplay = "camera"
 speed_scale = 0.05
 
-[node name="SoundAnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Sound" type="AnimationPlayer" parent="AnimationPlayers"]
+root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_f71vl")
 }
+
+[node name="UI" type="AnimationPlayer" parent="AnimationPlayers"]
+libraries = {
+&"": SubResource("AnimationLibrary_yxg74")
+}
+autoplay = "show"
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Leaderboard" to="." method="_on_leaderboard_pressed"]

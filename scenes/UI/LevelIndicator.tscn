@@ -8,11 +8,11 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g42hh"]
 bg_color = Color(0.38039216, 0.3647059, 0.91764706, 1)
-corner_radius_top_right = 8
+skew = Vector2(-0.5, 0)
 
 [sub_resource type="Gradient" id="Gradient_0xtuv"]
 offsets = PackedFloat32Array(0, 0.262626, 0.79265094, 1)
-colors = PackedColorArray(0, 0, 0, 0.501961, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5019608)
+colors = PackedColorArray(0, 0, 0, 0.0627451, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0627451)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_gqxkh"]
 gradient = SubResource("Gradient_0xtuv")
@@ -50,7 +50,8 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -1.0
+offset_left = -2.0
+offset_top = -8.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/background = SubResource("StyleBoxEmpty_aqt1x")
@@ -60,7 +61,7 @@ show_percentage = false
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 52.0
+offset_bottom = 45.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_u460k")
 
@@ -69,14 +70,14 @@ layout_mode = 2
 theme_override_constants/separation = 8
 
 [node name="Main" type="Button" parent="CanvasLayer/PanelContainer/HBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 shortcut = SubResource("Shortcut_mosoo")
 icon = ExtResource("2_s6l1o")
 expand_icon = true
 
 [node name="Restart" type="Button" parent="CanvasLayer/PanelContainer/HBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 shortcut = SubResource("Shortcut_mosoo")
 icon = ExtResource("3_aqt1x")
@@ -93,7 +94,7 @@ theme_override_colors/font_outline_color = Color(0.105882, 0.121569, 0.168627, 1
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "Level 0"
 horizontal_alignment = 2
 vertical_alignment = 1
