@@ -22,7 +22,7 @@ access = 2
 filters = PackedStringArray("*.json")
 use_native_dialog = true
 
-[node name="PanelContainer" parent="." index="2"]
+[node name="PanelContainer" parent="." index="3"]
 offset_left = -424.0
 offset_right = 424.0
 

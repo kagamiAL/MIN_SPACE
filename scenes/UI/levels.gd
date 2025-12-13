@@ -2,7 +2,7 @@ extends "res://scenes/UI/Dialog.gd"
 
 func open():
 	$%DEFAULT.grab_focus()
-	show()
+	$AnimationPlayer.play("show")
 
 func clear_buttons():
 	for child in $%Levels.get_children():

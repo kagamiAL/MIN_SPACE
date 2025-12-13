@@ -3,8 +3,8 @@ extends Control
 @export var button_scene: PackedScene
 
 func open():
+	$AnimationPlayer.play("show")
 	$%Back.grab_focus()
-	show()
 
 func _on_back_pressed():
-	self.hide()
+	$AnimationPlayer.play("hide")
