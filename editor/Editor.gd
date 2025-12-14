@@ -60,6 +60,10 @@ func export_json():
 # Loads from a JSON (parsed)
 func load_json(input):
 	$TileMap.load_json(input)
+	
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		_on_mouse_control_gui_input(event)
 
 func _on_mouse_control_gui_input(event):
 	if event is InputEventMouseMotion:
@@ -121,4 +125,3 @@ func _on_mouse_control_gui_input(event):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		$TileMap.erase_at(marker_position)
 		emit_signal("modified")
-

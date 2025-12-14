@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bg0nxe4bxdesn"]
 
-[ext_resource type="Script" path="res://editor/Editor.gd" id="1_qtpau"]
-[ext_resource type="Script" path="res://scenes/Player/Sprite.gd" id="3_gvyou"]
+[ext_resource type="Script" uid="uid://d3qiqqubh6qe2" path="res://editor/Editor.gd" id="1_qtpau"]
+[ext_resource type="Script" uid="uid://dw4jnhytptekq" path="res://scenes/Player/Sprite.gd" id="3_gvyou"]
 [ext_resource type="PackedScene" uid="uid://b50u22ac7kuap" path="res://scenes/Tiles/savedtilemap/SavedTileMap.tscn" id="4_82d7c"]
 [ext_resource type="Texture2D" uid="uid://n32hsqeasyep" path="res://res/tiles.svg" id="4_wfxpc"]
 
@@ -37,6 +37,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+top_level = true
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -62,8 +63,8 @@ size_flags_horizontal = 3
 [node name="TileOptionButton" type="OptionButton" parent="CanvasLayer/MarginContainer/PanelContainer/HBoxContainer/Tiles"]
 unique_name_in_owner = true
 layout_mode = 2
-item_count = 7
 selected = 0
+item_count = 7
 popup/item_0/text = "Block"
 popup/item_0/id = 0
 popup/item_1/text = "Slope"

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqfy5urq65gy0"]
+[gd_scene load_steps=7 format=3 uid="uid://dqfy5urq65gy0"]
 
 [ext_resource type="Script" uid="uid://c0bspphj1a710" path="res://editor/Main/Main.gd" id="1_u1phi"]
 [ext_resource type="Shader" uid="uid://brtv6hc02ai5h" path="res://scenes/UI/Blur.gdshader" id="2_q1mmh"]
+[ext_resource type="Script" uid="uid://b6ph6spatgswo" path="res://editor/Main/sub_viewport_container.gd" id="3_fygsn"]
 [ext_resource type="PackedScene" uid="uid://bg0nxe4bxdesn" path="res://editor/Editor.tscn" id="3_xlwb1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dtduo"]
@@ -95,18 +96,29 @@ size_flags_horizontal = 4
 text = "No map selected"
 horizontal_alignment = 1
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/View"]
+[node name="SubViewportContainer" type="Control" parent="PanelContainer/VBoxContainer/HBoxContainer/View"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-stretch = true
+script = ExtResource("3_fygsn")
 
-[node name="SubViewport" type="SubViewport" parent="PanelContainer/VBoxContainer/HBoxContainer/View/SubViewportContainer"]
+[node name="Inner" type="Control" parent="PanelContainer/VBoxContainer/HBoxContainer/View/SubViewportContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="SubViewport" type="SubViewport" parent="PanelContainer/VBoxContainer/HBoxContainer/View/SubViewportContainer/Inner"]
 handle_input_locally = false
-size = Vector2i(2, 2)
-render_target_update_mode = 0
+gui_embed_subwindows = true
+size = Vector2i(792, 572)
+size_2d_override_stretch = true
+render_target_update_mode = 4
 
-[node name="Editor" parent="PanelContainer/VBoxContainer/HBoxContainer/View/SubViewportContainer/SubViewport" instance=ExtResource("3_xlwb1")]
+[node name="Editor" parent="PanelContainer/VBoxContainer/HBoxContainer/View/SubViewportContainer/Inner/SubViewport" instance=ExtResource("3_xlwb1")]
 unique_name_in_owner = true
 
 [node name="TabContainer" type="TabContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
@@ -216,7 +228,9 @@ dialog_text = "Are you sure? Any unsaved changes will be lost."
 
 [connection signal="id_pressed" from="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/MenuBar/File" to="." method="_on_file_id_pressed"]
 [connection signal="id_pressed" from="PanelContainer/VBoxContainer/PanelContainer/HBoxContainer/MenuBar/Edit" to="." method="_on_edit_id_pressed"]
-[connection signal="modified" from="PanelContainer/VBoxContainer/HBoxContainer/View/SubViewportContainer/SubViewport/Editor" to="." method="_on_editor_modified"]
+[connection signal="visibility_changed" from="PanelContainer/VBoxContainer/HBoxContainer/View/SubViewportContainer" to="PanelContainer/VBoxContainer/HBoxContainer/View/SubViewportContainer" method="_on_visibility_changed"]
+[connection signal="draw" from="PanelContainer/VBoxContainer/HBoxContainer/View/SubViewportContainer/Inner" to="PanelContainer/VBoxContainer/HBoxContainer/View/SubViewportContainer" method="_on_inner_draw"]
+[connection signal="modified" from="PanelContainer/VBoxContainer/HBoxContainer/View/SubViewportContainer/Inner/SubViewport/Editor" to="." method="_on_editor_modified"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Maps/HBoxContainer/NewMap" to="." method="_on_new_map_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Maps/HBoxContainer/DeleteMap" to="." method="_on_delete_map_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Maps/HBoxContainer/MoveUp" to="." method="_on_move_up_pressed"]
