@@ -24,7 +24,7 @@ func _process(_delta):
 
 
 func _on_map_editor_pressed():
-	$%Editor.show()
+	$%Editor.open()
 
 
 func _on_editor_visibility_changed():

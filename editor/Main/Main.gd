@@ -2,6 +2,9 @@ extends Control
 
 var maps = {}
 
+func open():
+	$AnimationPlayer.play("show")
+
 # Export to JSON (raw)
 func export_json():
 	var maps_cleaned = [];
@@ -101,7 +104,7 @@ func _on_map_tree_item_selected():
 func _on_file_id_pressed(id):
 	match id:
 		0:
-			hide()
+			$AnimationPlayer.play("hide")
 		1:
 			reset()
 		2:
