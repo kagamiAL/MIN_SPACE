@@ -25,20 +25,20 @@ func load_json(input):
 		tilemap.load_json(map["data"])
 		tilemap.name = map["name"]
 		maps.append(tilemap)
-	if "song" in input and FileAccess.file_exists(input["song"]):
-		if input["song"].ends_with(".ogg"):
-			var audio_stream = AudioStreamOggVorbis.load_from_file(input["song"])
+	if "song" in input:
+		if input["song"].ends_with(".ogg") || input["song"].ends_with(".oga"):
+			var audio_stream = AudioStreamOggVorbis.load_from_file("user://music/" + input["song"])
 			audio_stream.loop = true
 			$SoundTrack.stream = audio_stream
 		if input["song"].ends_with(".mp3"):
 			var audio_stream = AudioStreamMP3.new()
-			var file = FileAccess.open(input["song"], FileAccess.READ)
+			var file = FileAccess.open("user://music/" + input["song"], FileAccess.READ)
 			audio_stream.data = file.get_buffer(file.get_length())
 			audio_stream.loop = true
 			$SoundTrack.stream = audio_stream
 		if input["song"].ends_with(".wav"):
 			var audio_stream = AudioStreamWAV.new()
-			var file = FileAccess.open(input["song"], FileAccess.READ)
+			var file = FileAccess.open("user://music/" + input["song"], FileAccess.READ)
 			audio_stream.data = file.get_buffer(file.get_length())
 			audio_stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
 			$SoundTrack.stream = audio_stream

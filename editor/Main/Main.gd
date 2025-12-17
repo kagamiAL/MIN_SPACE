@@ -52,6 +52,7 @@ func load_json(input):
 	# Hides subviewport
 	$%SubViewportContainer.hide()
 
+# Resets the editor, clearing all fields and maps.
 func reset():
 	maps = {}
 	$%MapTree.clear()
@@ -63,6 +64,25 @@ func reset():
 	$%Properties/PropertySong.text = "Load file..."
 	$%Properties/PropertySong.tooltip_text = ""
 	$%Status.text = "Editor reset."
+	$%SaveButton.hide()
+
+# Saves the map into user:///maps
+func save() -> bool:
+	var dir = DirAccess.open("user://")
+	if dir:
+		dir.make_dir("user://maps/")
+		if len($%Properties/PropertyName.text.strip_edges()) > 0:
+			var file = FileAccess.open("user://maps/" + $%Properties/PropertyName.text + ".json", FileAccess.WRITE)
+			file.store_string(JSON.stringify(export_json()))
+			$%Status.text = "Saved circuit."
+			$%SaveButton.hide()
+			return true
+		else:
+			$AcceptDialog.dialog_text = "Could not save file. No name was found. Open the Properties tab to set one."
+			$AcceptDialog.popup_centered()
+	else:
+		pass # TODO aaaa what happens when there's no user directory oh dear
+	return false
 
 func _ready():
 	# Creates root map node
@@ -89,7 +109,8 @@ func _on_delete_map_pressed():
 	var selected = $%MapTree.get_selected()
 	if selected:
 		$%MapTree.get_root().remove_child(selected)
-	$%Status.text = "Map \"%s\" removed." % selected.get_text(0)
+		$%Status.text = "Map \"%s\" removed." % selected.get_text(0)
+	$%SubViewportContainer.hide()
 
 func _on_map_tree_item_selected():
 	$%SubViewportContainer.show()
@@ -98,7 +119,7 @@ func _on_map_tree_item_selected():
 	var selected = $%MapTree.get_selected()
 	if selected and selected in maps:
 		$%Editor.load_json(maps[selected])
-	$%Status.text = "Map \"%s\" selected." % selected.get_text(0)
+		$%Status.text = "Map \"%s\" selected." % selected.get_text(0)
 
 
 func _on_file_id_pressed(id):
@@ -110,13 +131,7 @@ func _on_file_id_pressed(id):
 		2:
 			$LoadDialog.show()
 		3:
-			if FileAccess.file_exists($SaveDialog.get_current_file()):
-				_on_save_dialog_file_selected($SaveDialog.get_current_file())
-			if FileAccess.file_exists($LoadDialog.get_current_file()):
-				_on_save_dialog_file_selected($LoadDialog.get_current_file())
-			else:
-				$%Status.text = "New file detected, opening save as..."
-				$SaveDialog.show()
+			save()
 		4:
 			$SaveDialog.show()
 
@@ -124,26 +139,46 @@ func _on_edit_id_pressed(id):
 	# TODO: Save beforehand
 	match id:
 		0:
-			$RunDialog.show()
+			$RunDialog.popup_centered()
 
 # If the editor modified its TileMap, save the map.
 func _on_editor_modified():
+	$%SaveButton.show()
 	var selected = $%MapTree.get_selected()
 	if selected:
 		maps[selected] = $%Editor.export_json()
 
 func _on_save_dialog_file_selected(path : String):
-	path = path.replace(".json", "") + ".json"
-	var file = FileAccess.open(path, FileAccess.WRITE)
-	file.store_string(JSON.stringify(export_json()))
-	file.close()
+	if len($%Properties/PropertyName.text.strip_edges()) > 0:
+		# Ensure path ends in .zip
+		path = path.replace(".zip", "") + ".zip"
+		# Create .zip
+		var writer = ZIPPacker.new()
+		var err = writer.open(path)
+		if err != OK:
+			return err
+		# Write map json
+		writer.start_file("maps/" + $%Properties/PropertyName.text + ".json")
+		writer.write_file(JSON.stringify(export_json()).to_utf8_buffer())
+		writer.close_file()
+		# Write music
+		if $%Properties/PropertySong.text != "":
+			var music_file = FileAccess.get_file_as_bytes("user://music/" + $%Properties/PropertySong.text)
+			writer.start_file("music/" + $%Properties/PropertySong.text)
+			writer.write_file(music_file)
+			writer.close_file()
+		# Clean up
+		writer.close()
+	else:
+		$AcceptDialog.dialog_text = "Could not export circuit. No name was found. Open the Properties tab to set one."
+		$AcceptDialog.popup_centered()
 	$%Status.text = "File saved to %s." % path
 	
 func _on_load_dialog_file_selected(path):
 	var file = FileAccess.open(path, FileAccess.READ)
 	load_json(JSON.parse_string(file.get_as_text()))
 	file.close()
-	$%Status.text = "Loaded %s." % path
+	$%Status.text = "Loaded %s." % path.get_file()
 
 # Runs the circuit.
 func _on_run_dialog_confirmed():
@@ -153,11 +188,31 @@ func _on_run_dialog_confirmed():
 
 
 func _on_load_music_dialog_file_selected(path):
-	$%Properties/PropertySong.text = path
-	$%Properties/PropertySong.tooltip_text = path
-	#var base64 = Marshalls.raw_to_base64(FileAccess.get_file_as_bytes(path))
-	#print(base64)
-
+	$%SaveButton.show()
+	var filename = path.get_file()
+	# 1. Copy song file to user://music/
+	DirAccess.make_dir_absolute("user://music")
+	var dir = DirAccess.open(path.get_base_dir())
+	if dir:
+		dir.copy(path, "user://music/" + filename)
+	# 2. Set $%Properties/PropertySong.text
+	$%Properties/PropertySong.text = filename
+	$%Properties/PropertySong.tooltip_text = filename
 
 func _on_property_song_pressed():
 	$LoadMusicDialog.show()
+
+
+func _on_save_button_pressed() -> void:
+	save()
+
+func _on_modification() -> void:
+	$%SaveButton.show()
+
+
+func _on_property_author_text_changed(_new_text: String) -> void:
+	$%SaveButton.show()
+
+
+func _on_property_name_text_changed(_new_text: String) -> void:
+	$%SaveButton.show()

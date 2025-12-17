@@ -8,6 +8,21 @@ var pan_start : Vector2;
 
 var marker_position : Vector2i = Vector2i(0, 0)
 
+func move_mouse(event):
+	var mouse_position = $%MouseControl.get_local_mouse_position()
+	var global_mouse_position = $AddMarker.get_global_mouse_position()
+	# Marker
+	marker_position = Vector2i(
+		floor(global_mouse_position.x / 64),
+		floor(global_mouse_position.y / 64)
+	)
+	$AddMarker.position = Vector2(marker_position * 64) + marker_offset
+	# Panning
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
+		if pan_start.x != 0 and pan_start.y != 0:
+			$Camera2D.position -= (mouse_position - pan_start) * 1/$Camera2D.zoom
+		pan_start = mouse_position
+
 # Updates AddMarker
 # TODO: find a way to make this not hard-coded
 func _on_option_button_item_selected(index):
@@ -61,25 +76,13 @@ func export_json():
 func load_json(input):
 	$TileMap.load_json(input)
 	
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		_on_mouse_control_gui_input(event)
+		move_mouse(event)
 
 func _on_mouse_control_gui_input(event):
 	if event is InputEventMouseMotion:
-		var mouse_position = $%MouseControl.get_local_mouse_position()
-		var global_mouse_position = $AddMarker.get_global_mouse_position()
-		# Marker
-		marker_position = Vector2i(
-			floor(global_mouse_position.x / 64),
-			floor(global_mouse_position.y / 64)
-		)
-		$AddMarker.position = Vector2(marker_position * 64) + marker_offset
-		# Panning
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
-			if pan_start.x != 0 and pan_start.y != 0:
-				$Camera2D.position -= (mouse_position - pan_start) * 1/$Camera2D.zoom
-			pan_start = mouse_position
+		move_mouse(event)
 	# Resetting panning
 	if event is InputEventMouseButton and (pan_start.x != 0 or pan_start.y != 0):
 			pan_start.x = 0

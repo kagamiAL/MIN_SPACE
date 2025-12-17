@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bg0nxe4bxdesn"]
+[gd_scene load_steps=10 format=3 uid="uid://bg0nxe4bxdesn"]
 
 [ext_resource type="Script" uid="uid://d3qiqqubh6qe2" path="res://editor/Editor.gd" id="1_qtpau"]
 [ext_resource type="Script" uid="uid://dw4jnhytptekq" path="res://scenes/Player/Sprite.gd" id="3_gvyou"]
@@ -21,6 +21,14 @@ unicode = 108
 [sub_resource type="Shortcut" id="Shortcut_livu2"]
 events = [SubResource("InputEventKey_0nhwg")]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_52o2w"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.566895, 0.566895, 0.566895, 1)
+
 [node name="Editor" type="Node2D"]
 script = ExtResource("1_qtpau")
 marker_offset = Vector2(32, 32)
@@ -33,6 +41,7 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -79.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -103,6 +112,20 @@ modulate = Color(0.523, 1, 0.46, 0.572549)
 texture = ExtResource("4_wfxpc")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 64)
+
+[node name="Panel" type="Panel" parent="AddMarker"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_52o2w")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

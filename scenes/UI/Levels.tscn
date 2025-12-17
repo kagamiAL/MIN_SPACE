@@ -19,7 +19,7 @@ title = "Open a File"
 ok_button_text = "Open"
 file_mode = 0
 access = 2
-filters = PackedStringArray("*.json")
+filters = PackedStringArray("*.zip")
 use_native_dialog = true
 
 [node name="PanelContainer" parent="." index="3"]
@@ -47,19 +47,26 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
-columns = 6
+columns = 3
 
 [node name="DEFAULT" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/Content/Levels" index="0" instance=ExtResource("2_e2qm2")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(474, 128)
 layout_mode = 2
 text = "MIN SPACE
 Built-in"
 
 [node name="SubViewport" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/Content/Levels/DEFAULT" index="0"]
-size = Vector2i(470, 120)
+size = Vector2i(128, 128)
 
 [node name="Map01" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/Content/Levels/DEFAULT/SubViewport" index="2" instance=ExtResource("4_wly44")]
+
+[node name="Control" type="Control" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/Content/Levels" index="1"]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="PanelContainer/CenterContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/Content/Levels" index="2"]
+layout_mode = 2
+
+[node name="AcceptDialog" type="AcceptDialog" parent="." index="4"]
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

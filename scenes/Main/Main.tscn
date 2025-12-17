@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bhju5n4ymgoto"]
+[gd_scene load_steps=24 format=3 uid="uid://bhju5n4ymgoto"]
 
 [ext_resource type="Script" uid="uid://bc5o26f6hk2yq" path="res://scenes/Main/Menu.gd" id="1_r3bay"]
 [ext_resource type="AudioStream" uid="uid://bxr6qqqx2lq5d" path="res://res/audio/MainMenuTheme.ogg" id="3_aul47"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dqfy5urq65gy0" path="res://editor/Main/EditorMain.tscn" id="5_a2ivn"]
 [ext_resource type="PackedScene" uid="uid://b43w80klpbdo6" path="res://scenes/UI/Levels.tscn" id="6_c5yde"]
 [ext_resource type="AudioStream" uid="uid://bwq6ovbkav027" path="res://res/audio/MapTheme.ogg" id="7_awp7m"]
+[ext_resource type="PackedScene" uid="uid://d0tjurbwslrgx" path="res://scenes/UI/LevelButton.tscn" id="8_krkin"]
 
 [sub_resource type="SystemFont" id="SystemFont_p7tdo"]
 font_names = PackedStringArray("Century Gothic")
@@ -543,6 +544,7 @@ visible = false
 
 [node name="Levels" parent="CanvasLayer" instance=ExtResource("6_c5yde")]
 unique_name_in_owner = true
+button_scene = ExtResource("8_krkin")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_aul47")

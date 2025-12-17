@@ -100,7 +100,8 @@ func erase_at(erase_position: Vector2i):
 	for layer in range(get_layers_count()):
 		set_cell(layer, erase_position, -1)
 
-
 func _on_tree_entered():
+	if get_tree():
+		await get_tree().process_frame
 	for tile_rotation in _tile_rotation_queue:
 		call_deferred("set_tile_scene_rotation", tile_rotation[0], tile_rotation[1])
