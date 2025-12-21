@@ -8,6 +8,14 @@ var player;
 
 @export var level_index: int;
 
+func reset():
+	level_index = 0
+	$LevelIndicator.set_label("Level %d" % level_index, level_index, 7)
+	load_current_level()
+	$Player.show()
+	$Player.reset_time()
+	$GameWin.hide()
+
 func set_up_maps_from_dir(path: String):
 	var regex = RegEx.new()
 	regex.compile("\\d+")
@@ -32,11 +40,16 @@ func load_current_level():
 	if map_node:
 		map_node.queue_free()
 		await map_node.tree_exited
-	$Player.reset()
-	await get_tree().physics_frame
+	# Stop player
+	$Player.stop()
+	# Add map
 	map_node = maps[level_index].instantiate()
 	map_node.z_index = -1
 	add_child(map_node)
+	await get_tree().process_frame
+	# THEN reset player
+	$Player.reset()
+	await get_tree().physics_frame
 
 #Returns true if player won game
 func next_level() -> bool:
@@ -56,7 +69,8 @@ func _on_player_won():
 	$WinSound.play()
 	if next_level():
 		$GameWin.set_time($Player.get_time_elapsed())
-		$GameWin.show()
+		$GameWin.set_map_name("MIN SPACE")
+		$GameWin.animate_show()
 		$Player.hide()
 	else:
 		$LevelIndicator.set_label("Level %d" % level_index, level_index, 7)
@@ -67,8 +81,12 @@ func _on_player_died():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Engine.physics_ticks_per_second = DisplayServer.screen_get_refresh_rate() # Hack to make physics smooth
+	Engine.physics_ticks_per_second = int(DisplayServer.screen_get_refresh_rate()) # Hack to make physics smooth
 	print("Physics engine set to %d FPS" % Engine.physics_ticks_per_second)
 	set_up_maps_from_dir("res://scenes/Maps")
 	load_current_level()
 	$SoundTrack.play()
+
+
+func _on_level_indicator_restart_pressed() -> void:
+	reset()

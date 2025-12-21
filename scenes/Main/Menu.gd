@@ -6,17 +6,17 @@ func _ready():
 	$%Play.grab_focus()
 
 func _on_play_pressed():
-	$%Levels.show()
+	$%Levels.open()
 
 func _on_quit_pressed():
 	get_tree().quit()
 
 func _on_leaderboard_pressed():
 	$%LeaderBoard._update_leaderboard()
-	$%LeaderBoard.visible = true
+	$%LeaderBoard.open()
 
 func _on_settings_pressed():
-	$%Settings.visible = true
+	$%Settings.open()
 
 func _process(_delta):
 	$Camera2D.zoom.x = max(1, get_viewport_rect().size.x / 1216)
@@ -24,12 +24,24 @@ func _process(_delta):
 
 
 func _on_map_editor_pressed():
-	$%Editor.show()
+	$%Editor.open()
 
 
 func _on_editor_visibility_changed():
 	if $%Editor.visible:
 		$MapTheme.play()
-		$SoundAnimationPlayer.play("crossfade")
+		$AnimationPlayers/Sound.play("crossfade")
 	else:
-		$SoundAnimationPlayer.play_backwards("crossfade")
+		$%MapEditor.grab_focus()
+		$AnimationPlayers/Sound.play_backwards("crossfade")
+
+# Oh dear
+
+func _on_leader_board_hidden() -> void:
+	$%Leaderboard.grab_focus()
+
+func _on_settings_hidden() -> void:
+	$%SettingsButton.grab_focus()
+
+func _on_levels_hidden() -> void:
+	$%Play.grab_focus()

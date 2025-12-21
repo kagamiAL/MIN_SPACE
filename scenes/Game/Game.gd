@@ -9,6 +9,14 @@ var map_node
 
 var _circuit_json;
 
+func reset():
+	level_index = 0
+	$LevelIndicator.set_label(map_node.name, level_index + 1, len(maps))
+	load_current_level()
+	$Player.show()
+	$Player.reset_time()
+	$GameWin.hide()
+
 # Loads from a parsed circuit (not map) JSON
 func load_json(input):
 	_circuit_json = input
@@ -17,20 +25,20 @@ func load_json(input):
 		tilemap.load_json(map["data"])
 		tilemap.name = map["name"]
 		maps.append(tilemap)
-	if "song" in input and FileAccess.file_exists(input["song"]):
-		if input["song"].ends_with(".ogg"):
-			var audio_stream = AudioStreamOggVorbis.load_from_file(input["song"])
+	if "song" in input:
+		if input["song"].ends_with(".ogg") || input["song"].ends_with(".oga"):
+			var audio_stream = AudioStreamOggVorbis.load_from_file("user://music/" + input["song"])
 			audio_stream.loop = true
 			$SoundTrack.stream = audio_stream
 		if input["song"].ends_with(".mp3"):
 			var audio_stream = AudioStreamMP3.new()
-			var file = FileAccess.open(input["song"], FileAccess.READ)
+			var file = FileAccess.open("user://music/" + input["song"], FileAccess.READ)
 			audio_stream.data = file.get_buffer(file.get_length())
 			audio_stream.loop = true
 			$SoundTrack.stream = audio_stream
 		if input["song"].ends_with(".wav"):
 			var audio_stream = AudioStreamWAV.new()
-			var file = FileAccess.open(input["song"], FileAccess.READ)
+			var file = FileAccess.open("user://music/" + input["song"], FileAccess.READ)
 			audio_stream.data = file.get_buffer(file.get_length())
 			audio_stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
 			$SoundTrack.stream = audio_stream
@@ -66,7 +74,8 @@ func _on_player_won():
 	$WinSound.play()
 	if next_level():
 		$GameWin.set_time($Player.get_time_elapsed())
-		$GameWin.show()
+		$GameWin.set_map_name(_circuit_json.name)
+		$GameWin.animate_show()
 		$Player.hide()
 	else:
 		load_current_level()
@@ -76,7 +85,7 @@ func _on_player_died():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Engine.physics_ticks_per_second = DisplayServer.screen_get_refresh_rate() # Hack to make physics smooth
+	Engine.physics_ticks_per_second = int(DisplayServer.screen_get_refresh_rate()) # Hack to make physics smooth
 	print("Physics engine set to %d FPS" % Engine.physics_ticks_per_second)
 
 

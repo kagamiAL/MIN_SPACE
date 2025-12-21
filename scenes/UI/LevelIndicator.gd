@@ -4,15 +4,13 @@ extends Control
 
 signal restart_pressed
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-
 func set_label(level_name: String, new_level: int, levels: int):
-	level.text = "%s, %d/%d" % [level_name, new_level, levels]
+	$%ProgressBar.max_value = levels
+	$%ProgressBar.value = new_level
+	level.text = level_name
 
 func _on_restart_pressed():
+	$CanvasLayer/PanelContainer/HBoxContainer/Restart.release_focus()
 	emit_signal("restart_pressed")
 
 

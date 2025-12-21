@@ -38,7 +38,7 @@ var last_position: Vector2;
 # Stores the time since the last time ContactAudio was playing.
 var contact_audio_request_timestamp = 0
 
-func _process(delta):
+func _process(_delta):
 	$%Time.text = "%.2f" % get_time_elapsed()
 
 func get_time_elapsed():
@@ -108,6 +108,9 @@ func handle_tile_collision(tilemap_layer):
 			emit_signal("won")
 
 func stop():
+	last_position = Vector2.ZERO
+	linear_velocity = Vector2.ZERO
+	angular_velocity = 0
 	set_process(false)
 	set_physics_process(false)
 	set_deferred("freeze", true)
@@ -125,7 +128,7 @@ func kill():
 	set_deferred("freeze", true)
 	linear_velocity = Vector2()
 	# Hide sprite
-	$Sprite.hide()
+	#$Sprite.hide()
 	$%Time.hide()
 	# Play death sound
 	$RollingTheyBoulder.stop()
@@ -133,18 +136,20 @@ func kill():
 	# All our food keeps BLOWING UP
 	$AnimationPlayer.play("die")
 
+func reset_time():
+	initial_time = Time.get_ticks_msec()
+
 func reset():
-	# Restart velocity + position
-	position = Vector2.ZERO
-	# Reset things
+	# Unfreeze
 	set_process(true)
 	set_physics_process(true)
 	set_deferred("freeze", false)
-	linear_velocity = Vector2()
+	# Reset velocity + position
+	position = Vector2.ZERO
+	linear_velocity = Vector2.ZERO
 	# Show sprite
 	$Sprite.show()
 	$%Time.show()
-	$GPUParticles2D.emitting = false
 	$AnimationPlayer.play("RESET")
 
 func is_on_floor():
@@ -173,16 +178,17 @@ func detect_wall_clipping():
 			return
 	last_position = self.global_position
 
-func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+func _on_area_2d_body_shape_entered(body_rid, body, _body_shape_index, _local_shape_index):
 	if body is TileMap:
 		_collisions.append(body_rid)
 
-func _on_area_2d_body_shape_exited(body_rid, body, body_shape_index, local_shape_index):
+func _on_area_2d_body_shape_exited(body_rid, body, _body_shape_index, _local_shape_index):
 	if body is TileMap:
-		_collisions.remove_at(_collisions.find(body_rid))
+		var idx = _collisions.find(body_rid)
+		if idx > -1: _collisions.remove_at(idx)
 
 # Makes a sound when it hits a body
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	if (not contact_audio_request_timestamp\
 	   or (Time.get_ticks_msec() - contact_audio_request_timestamp) > 50)\
 		and not $ContactAudio.playing:
